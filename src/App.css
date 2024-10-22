@@ -1,0 +1,20 @@
+.navbar-links{
+
+    padding: 10px 20px;
+    background: -moz-linear-gradient(90deg, #58def8 0%, #00ffe5 100%);
+    background:  -webkit-linear-gradient(90deg,  #58def8 0%, #00ffd9 100%);
+    text-decoration: none;
+    font-size: 1rem;
+    color: rgb(79, 79, 79);
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 2px 2px 5px 3px #98b5b5;
+    transition: all 0.3s ease;
+}
+.navbar-links:hover{
+  
+  background: -moz-linear-gradient(90deg, #58def8 0%, #00ffe5 100%);
+  background:  -webkit-linear-gradient(90deg,  #32c5e2 0%, #18e3c5 100%);
+}
