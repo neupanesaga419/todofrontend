@@ -16,11 +16,13 @@ import "./App.css";
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true); // Loading state
+  const [loggedIn, setLoggedIn] = useState(false); // Login state
 
   // Effect to check login status
   useEffect(() => {
     const checkLoginStatus = async () => {
       // Simulate an async operation (like an API call)
+      setLoggedIn(isLoggedIn());
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setLoading(false); // Set loading to false after checking
     };
@@ -44,19 +46,23 @@ const App: React.FC = () => {
     );
   }
 
-  const loggedIn = isLoggedIn(); // Check if user is logged in
-
   return (
     <Router>
       <Routes>
         {/* Conditional route handling based on login status */}
         <Route
-          path="/login"
-          element={loggedIn ? <Navigate to="/" /> : <LoginPage />}
+          path="/"
+          element={
+            loggedIn ? (
+              <Navigate to="/home" />
+            ) : (
+              <LoginPage setLoggedIn={setLoggedIn} />
+            )
+          }
         />
         <Route
-          path="/"
-          element={loggedIn ? <Home /> : <Navigate to="/login" />}
+          path="/home"
+          element={loggedIn ? <Home /> : <Navigate to="/" />}
         />
       </Routes>
     </Router>

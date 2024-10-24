@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -7,11 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login, getUserData } from "../utils/auth"; // Assuming these functions are defined in auth.ts
 
+// Define form schema using zod
 const loginSchema = z.object({
   email: z.string(),
   password: z.string().min(6, "Password must be at least 6 characters long"),
@@ -19,7 +18,17 @@ const loginSchema = z.object({
 
 type LoginFormInputs = z.infer<typeof loginSchema>;
 
-export const LoginForm: React.FC = () => {
+interface LoginFormProps {
+  onSubmit: (data: LoginFormInputs) => void; // Function to handle form submission
+  loading: boolean; // Loading state to show/hide spinner
+  error: string | null; // Error state to display login errors
+}
+
+export const LoginForm: React.FC<LoginFormProps> = ({
+  onSubmit,
+  loading,
+  error,
+}) => {
   const {
     register,
     handleSubmit,
@@ -27,37 +36,6 @@ export const LoginForm: React.FC = () => {
   } = useForm<LoginFormInputs>({
     resolver: zodResolver(loginSchema),
   });
-
-  const [loading, setLoading] = useState<boolean>(false); // To manage loading state
-  const [loginError, setLoginError] = useState<string | null>(null); // To manage login errors
-  const navigate = useNavigate();
-
-  // Form submit handler
-  const onSubmit = async (data: LoginFormInputs) => {
-    setLoading(true); // Show the spinner
-    setLoginError(null); // Reset any previous error
-
-    try {
-      // Call the login function and store the tokens
-      const logged = await login(data.email, data.password);
-
-      if (logged) {
-        // Once logged in, call the API to check if token is valid
-        const userData = await getUserData();
-
-        if (userData) {
-          navigate("/"); // Redirect to the home page on successful login
-        }
-      }
-    } catch (error) {
-      console.error("Login or token validation failed:", error);
-      setLoginError(
-        "Login failed or session expired. Please check your credentials."
-      );
-    } finally {
-      setLoading(false); // Hide the spinner after login attempt
-    }
-  };
 
   return (
     <Box
@@ -175,7 +153,7 @@ export const LoginForm: React.FC = () => {
       </form>
 
       {/* Error message display */}
-      {loginError && (
+      {error && (
         <Typography
           variant="body2"
           sx={{
@@ -185,15 +163,9 @@ export const LoginForm: React.FC = () => {
             textAlign: "center",
           }}
         >
-          {loginError}
+          {error}
         </Typography>
       )}
-
-      <Box sx={{ marginTop: "20px" }}>
-        <Typography>
-          Don’t have an account? <Link to="/signup">Sign up</Link>
-        </Typography>
-      </Box>
     </Box>
   );
 };

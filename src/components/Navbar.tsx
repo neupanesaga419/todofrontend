@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
+
 import { Link } from "react-router-dom";
 import { getUserData } from "../utils/auth"; // Assuming you have this function to fetch user data
-
+import LogoutButton from "./Logout";
 interface User {
   data: { username: string; email: string };
 }
@@ -67,9 +68,12 @@ export const Navbar = () => {
           </Link>
           {/* Conditional rendering based on user's login status */}
           {user ? (
-            <Typography sx={{ color: "#333", fontWeight: "500" }}>
-              Hi, {user?.data?.username}
-            </Typography>
+            <Box>
+              <Typography sx={{ color: "#333", fontWeight: "500" }}>
+                Hi, {user?.data?.username}
+              </Typography>
+              <LogoutButton />
+            </Box>
           ) : (
             <Link to="/login" className="navbar-links">
               Login

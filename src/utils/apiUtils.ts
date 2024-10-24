@@ -21,18 +21,22 @@ export const getTokenData = (): TokenData => {
 
 export const isLoggedIn = (): boolean => {
   const { accessToken, refreshToken } = getTokenData();
+  console.log(accessToken, refreshToken);
+  
 
   // Check if access token exists and is valid
   if (accessToken) {
+   
     return true; // User is logged in if access token is present
   }
 
   // Check if refresh token is present and has not expired
-  if (refreshToken) {
+  else if (refreshToken) {
+    
     const refreshTokenExpiry = decodeRefreshTokenExpiry(refreshToken);
     return refreshTokenExpiry > Date.now() / 1000; // Compare expiry time with current time
   }
-
+  
   return false; // User is not logged in
 };
 
