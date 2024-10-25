@@ -1,9 +1,9 @@
-import { HeroSection } from "../components/HeroSection";
+import { HomeContents } from "../components/HomeContents";
 
 export const Home = () => {
   return (
     <div>
-      <HeroSection />
+      <HomeContents />
     </div>
   );
 };

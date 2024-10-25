@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 
 import { Link } from "react-router-dom";
 import { getUserData } from "../utils/auth"; // Assuming you have this function to fetch user data
-import LogoutButton from "./Logout";
+import LogoutButton from "./login/Logout";
 interface User {
   data: { username: string; email: string };
 }
@@ -59,12 +59,12 @@ export const Navbar = () => {
         <Box
           sx={{
             display: "flex",
-            gap: "50px",
+            gap: "10px",
             flexDirection: "row",
           }}
         >
-          <Link to="/createtodo" className="navbar-links">
-            Get Started
+          <Link to="/profile" className="navbar-links">
+            Profile
           </Link>
           {/* Conditional rendering based on user's login status */}
           {user ? (

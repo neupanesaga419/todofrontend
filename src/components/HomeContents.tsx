@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { Navbar } from "./Navbar";
-import { HeroBackground } from "./HeroBackground";
-import { SkyBlueBox } from "./SkyBlueBox";
-import { HeroContent } from "./HeroContent";
+import { HeroBackground } from "./hero/HeroBackground";
+import { SkyBlueBox } from "./hero/SkyBlueBox";
+import { HeroContent } from "./hero/HeroContent";
 
-export const HeroSection: React.FC = () => {
+export const HomeContents: React.FC = () => {
   return (
     <Box
       sx={{

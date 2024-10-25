@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import backgroundImage from "../assets/todo-background-login.jpg"; // Ensure this is the correct path
+import backgroundImage from "../../assets/todo-background-login.jpg"; // Ensure this is the correct path
 
 export const LoginBackground: React.FC = () => {
   return (
