@@ -1,7 +1,7 @@
-import {jwtDecode} from 'jwt-decode';
+import {jwtDecode} from "jwt-decode";
 
 interface TokenData {
-  accessToken: string | null;
+  authToken: string | null;
   refreshToken: string | null;
 }
 
@@ -9,55 +9,70 @@ interface DecodedToken {
   exp: number; // Expiry time in Unix timestamp format
 }
 
+// Retrieve tokens from local storage
 export const getTokenData = (): TokenData => {
-  const accessToken = localStorage.getItem('accessToken');
-  const refreshToken = localStorage.getItem('refreshToken');
+  const authToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
 
   return {
-    accessToken,
+    authToken,
     refreshToken,
   };
 };
 
+// Check if the user is logged in based on authToken validity
 export const isLoggedIn = (): boolean => {
-  const { accessToken, refreshToken } = getTokenData();
-  console.log(accessToken, refreshToken);
-  
+  const { authToken } = getTokenData();
 
-  // Check if access token exists and is valid
-  if (accessToken) {
-   
-    return true; // User is logged in if access token is present
+  if (authToken) {
+    return !isTokenExpired(); // User is logged in if authToken exists and hasn't expired
   }
 
-  // Check if refresh token is present and has not expired
-  else if (refreshToken) {
-    
-    const refreshTokenExpiry = decodeRefreshTokenExpiry(refreshToken);
-    return refreshTokenExpiry > Date.now() / 1000; // Compare expiry time with current time
-  }
-  
-  return false; // User is not logged in
+  return false; // User is not logged in if no valid authToken is present
 };
 
+// Get the expiration time of authToken in milliseconds
+export const getTokenExpiry = (): number | null => {
+  const { authToken } = getTokenData();
+ 
+
+  if (!authToken) return null;
+
+  try {
+    const decoded: DecodedToken = jwtDecode(authToken);
+    // Return expiry time in milliseconds
+    return decoded.exp * 1000;
+  } catch (error) {
+    console.error("Failed to decode authToken:", error);
+    return null;
+  }
+};
+
+// Check if a given token has expired
+const isTokenExpired = (): boolean => {
+  const expiryTime = getTokenExpiry();
+  return expiryTime ? expiryTime <= Date.now() : true;
+};
+
+// Check if refreshToken has expired
 export const isRefreshTokenExpired = (): boolean => {
   const { refreshToken } = getTokenData();
 
-  // Check if the refresh token exists
   if (refreshToken) {
-    const refreshTokenExpiry = decodeRefreshTokenExpiry(refreshToken);
-    return refreshTokenExpiry <= Date.now() / 1000; // Check if it has expired
+    const refreshTokenExpiry = decodeTokenExpiry(refreshToken);
+    return refreshTokenExpiry <= Date.now();
   }
 
-  return true; // If no refresh token, it's considered expired
+  return true;
 };
 
-const decodeRefreshTokenExpiry = (token: string): number => {
+// Decode token expiry time (used for both authToken and refreshToken)
+const decodeTokenExpiry = (token: string): number => {
   try {
     const decoded: DecodedToken = jwtDecode(token);
-    return decoded.exp; // Return the expiration time
+    return decoded.exp * 1000; // Convert expiry to milliseconds
   } catch (error) {
-    console.error('Failed to decode refresh token:', error);
-    return 0; // Default to 0 if decoding fails
+    console.error("Failed to decode token:", error);
+    return 0;
   }
 };
