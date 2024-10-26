@@ -4,6 +4,8 @@ import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { getUserData } from "../utils/auth"; // Assuming you have this function to fetch user data
 import LogoutButton from "./login/Logout";
+import userImage from "../assets/hero-img.png";
+import Profile from "./Profile";
 interface User {
   data: { username: string; email: string };
 }
@@ -24,6 +26,12 @@ export const Navbar = () => {
 
     fetchUserData(); // Call the function to get user data
   }, []);
+  const handleViewProfile = () => {
+    // Navigate to the profile page
+    console.log("View Profile clicked");
+  };
+
+  const userName = user?.data?.username;
 
   return (
     <AppBar position="absolute" color="transparent" elevation={0}>
@@ -63,17 +71,14 @@ export const Navbar = () => {
             flexDirection: "row",
           }}
         >
-          <Link to="/profile" className="navbar-links">
-            Profile
-          </Link>
           {/* Conditional rendering based on user's login status */}
           {user ? (
-            <Box>
-              <Typography sx={{ color: "#333", fontWeight: "500" }}>
-                Hi, {user?.data?.username}
-              </Typography>
-              <LogoutButton />
-            </Box>
+            <Profile
+              name={userName ?? ""}
+              imageUrl={userImage}
+              onViewProfile={handleViewProfile}
+              LogoutButton={<LogoutButton />}
+            />
           ) : (
             <Link to="/login" className="navbar-links">
               Login
