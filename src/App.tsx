@@ -23,6 +23,7 @@ import Typography from "@mui/material/Typography";
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/poppins/500.css";
 import "./App.css";
+import TodoList from "./pages/Todos";
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -142,6 +143,10 @@ const App: React.FC = () => {
         <Route
           path="/home"
           element={loggedIn ? <Home /> : <Navigate to="/" replace />}
+        />
+        <Route
+          path="/todos"
+          element={loggedIn ? <TodoList /> : <Navigate to="/" replace />}
         />
       </Routes>
 

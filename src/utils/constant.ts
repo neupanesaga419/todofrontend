@@ -6,3 +6,5 @@ export const GET_TOKEN = "/auth/token/"
 export const REFRESH_TOKEN = "/auth/token/refresh/"
 
 export const GET_USER = "/auth/users/"
+
+export const CREATE_TODO = "/api/todos/"

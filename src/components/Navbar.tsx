@@ -34,14 +34,16 @@ export const Navbar = () => {
   const userName = user?.data?.username;
 
   return (
-    <AppBar position="absolute" color="transparent" elevation={0}>
+    <AppBar position="sticky" color="transparent" elevation={0}>
       <Toolbar
         sx={{
           justifyContent: "space-between",
           padding: "20px 50px",
-          backgroundColor: "rgba(255, 255, 255, 0.7)", // Slight transparency for blend-in
+          // backgroundColor: "rgba(255, 255, 255, 0.7)", // Slight transparency for blend-in
           backdropFilter: "blur(10px)", // Smooth blending with Hero Section
           zIndex: 2, // Ensure the navbar is above the background image
+          backgroundColor: "#85FFBD",
+          backgroundImage: `linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%)`,
         }}
       >
         <Typography
@@ -58,7 +60,9 @@ export const Navbar = () => {
         </Typography>
 
         <Box sx={{ display: "flex", gap: "25px" }}>
-          <Button sx={{ color: "#333", fontWeight: "500" }}>Home</Button>
+          <Link to={"/home"}>
+            <Button sx={{ color: "#333", fontWeight: "500" }}>Home</Button>
+          </Link>
           <Button sx={{ color: "#333", fontWeight: "500" }}>About</Button>
           <Button sx={{ color: "#333", fontWeight: "500" }}>Feature</Button>
           <Button sx={{ color: "#333", fontWeight: "500" }}>Contact</Button>

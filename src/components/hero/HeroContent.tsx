@@ -1,5 +1,6 @@
 import { Box, Typography, Button } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const HeroContent: React.FC = () => {
   return (
@@ -40,18 +41,21 @@ export const HeroContent: React.FC = () => {
         <Typography variant="body1" sx={{ mb: 4, color: "#555" }}>
           Stay organized with JWT Todo. Secure, efficient, and easy to use.
         </Typography>
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#4caf50",
-            color: "#fff",
-            borderRadius: "30px",
-            padding: "12px 40px",
-            ":hover": { backgroundColor: "#45a049" },
-          }}
-        >
-          Get Started
-        </Button>
+
+        <Link to="/todos">
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#4caf50",
+              color: "#fff",
+              borderRadius: "30px",
+              padding: "12px 40px",
+              ":hover": { backgroundColor: "#45a049" },
+            }}
+          >
+            Get Started
+          </Button>
+        </Link>
       </Box>
     </Box>
   );
