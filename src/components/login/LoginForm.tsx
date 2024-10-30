@@ -5,6 +5,7 @@ import {
   CircularProgress,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -37,15 +38,17 @@ export const LoginForm: React.FC<LoginFormProps> = ({
     resolver: zodResolver(loginSchema),
   });
 
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <Box
       sx={{
         borderRadius: "20px",
-        padding: "40px",
+        padding: isMobile ? "20px" : "40px",
         backdropFilter: "blur(20px)",
         boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
         maxWidth: "400px",
-        height: "450px",
+        height: isMobile ? "auto" : "450px",
         width: "100%",
         zIndex: 1,
         display: "flex",
@@ -54,10 +57,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       }}
     >
       <Typography
-        variant="h4"
+        variant={isMobile ? "h5" : "h4"}
         sx={{
           fontWeight: "bold",
-          marginBottom: "30px",
+          marginBottom: isMobile ? "20px" : "30px",
           color: "#000",
           textAlign: "center",
           fontFamily: "Playfair Display, serif",
@@ -143,7 +146,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
                 fontWeight: "bold",
                 borderRadius: "20px",
                 ":hover": { backgroundColor: "#45a049" },
-                width: "50%",
+                width: isMobile ? "100%" : "50%",
               }}
             >
               Login

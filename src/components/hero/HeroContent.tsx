@@ -1,15 +1,17 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, useMediaQuery } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
 export const HeroContent: React.FC = () => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <Box
       sx={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "100px 50px",
+        padding: isMobile ? "50px 20px" : "100px 50px",
         minHeight: "100vh",
         position: "relative",
         zIndex: 2,
@@ -18,7 +20,7 @@ export const HeroContent: React.FC = () => {
       <Box
         sx={{
           backgroundColor: "rgba(255, 255, 255, 0.9)",
-          padding: "40px",
+          padding: isMobile ? "20px" : "40px",
           borderRadius: "12px",
           textAlign: "center",
           boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
@@ -28,7 +30,7 @@ export const HeroContent: React.FC = () => {
         }}
       >
         <Typography
-          variant="h3"
+          variant={isMobile ? "h4" : "h3"}
           sx={{
             fontWeight: "bold",
             mb: 2,
@@ -49,7 +51,7 @@ export const HeroContent: React.FC = () => {
               backgroundColor: "#4caf50",
               color: "#fff",
               borderRadius: "30px",
-              padding: "12px 40px",
+              padding: isMobile ? "10px 30px" : "12px 40px",
               ":hover": { backgroundColor: "#45a049" },
             }}
           >

@@ -1,15 +1,17 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import React from "react";
 
 export const SkyBlueBox: React.FC = () => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <Box
       sx={{
         position: "absolute",
         top: 0,
         left: 0,
-        width: "25%",
-        height: "80%",
+        width: isMobile ? "100%" : "25%",
+        height: isMobile ? "100%" : "80%",
         backgroundColor: "rgba(3, 252, 244, 1)",
         zIndex: 1,
         display: "flex",

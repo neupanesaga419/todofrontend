@@ -9,6 +9,8 @@ import {
   FormControlLabel,
   Typography,
   Paper,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
@@ -24,7 +26,6 @@ interface Todo {
 }
 
 interface CreateTodoProps {
-  open: boolean;
   onClose: () => void;
   onTodoCreated: () => void;
   initialData?: Todo | null;
@@ -39,6 +40,9 @@ const CreateTodo: React.FC<CreateTodoProps> = ({
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("Not Started");
   const [completed, setCompleted] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     if (initialData) {
@@ -83,7 +87,16 @@ const CreateTodo: React.FC<CreateTodoProps> = ({
   };
 
   return (
-    <Paper elevation={3} sx={{ p: 3, position: "relative", mt: 2 }}>
+    <Paper
+      elevation={1}
+      sx={{
+        p: 3,
+        position: "relative",
+        mt: 2,
+        width: isMobile ? "90%" : "50%",
+        margin: isMobile ? "auto" : "initial",
+      }}
+    >
       <IconButton
         aria-label="close"
         onClick={onClose}

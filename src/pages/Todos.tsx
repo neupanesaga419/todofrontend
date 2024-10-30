@@ -5,6 +5,8 @@ import {
   Typography,
   Modal,
   CircularProgress,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,18 +21,17 @@ import { useTodos } from "../hooks/useTodos";
 import { Todo } from "../types/todo";
 import TodoCard from "../components/todos/TodoCard";
 
-const modalStyle = {
+const modalStyle = (isMobile: boolean) => ({
   position: "absolute",
   top: "50%",
-  left: "50%",
+  left: isMobile ? "49%" : "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: isMobile ? "90%" : 400,
   maxHeight: "90vh",
   overflowY: "auto",
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-};
+
+  p: 2,
+});
 
 interface GroupedTodos {
   "Not Started": Todo[];
@@ -45,6 +46,9 @@ const TodoList: React.FC = () => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
   const [todoToEdit, setTodoToEdit] = useState<Todo | null>(null);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleOpenDelete = (todo: Todo) => {
     setTodoToDelete(todo);
@@ -135,8 +139,8 @@ const TodoList: React.FC = () => {
             onClick={() => handleTodoAction(null)}
             sx={{
               position: "fixed",
-              bottom: 80,
-              right: 50,
+              bottom: isMobile ? 20 : 80,
+              right: isMobile ? 20 : 50,
               zIndex: 1000,
               minWidth: 120,
               borderRadius: 1,
@@ -160,7 +164,13 @@ const TodoList: React.FC = () => {
               <CircularProgress />
             </Box>
           ) : (
-            <Box sx={{ display: "flex", gap: 2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: isMobile ? "column" : "row",
+                gap: 2,
+              }}
+            >
               {Object.keys(groupedTodos).map((status) => (
                 <Box
                   key={status}
@@ -217,12 +227,12 @@ const TodoList: React.FC = () => {
         </Box>
 
         <Modal open={openCreateModal} onClose={handleCloseCreateModal}>
-          <Box sx={modalStyle}>
-            <Typography variant="h6" component="h2" gutterBottom>
-              {todoToEdit ? "Edit Todo" : "Create Todo"}
-            </Typography>
+          <Box
+            sx={modalStyle(isMobile)}
+            maxWidth={isMobile ? "90%" : "500px"}
+            margin={isMobile ? "auto" : "initial"}
+          >
             <CreateTodo
-              open={openCreateModal}
               onClose={handleCloseCreateModal}
               onTodoCreated={handleTodoCreatedOrEdited}
               initialData={todoToEdit}

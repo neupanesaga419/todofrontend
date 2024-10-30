@@ -1,6 +1,5 @@
 import React from "react";
-import { IconButton, Tooltip } from "@mui/material";
-import LogoutIcon from "@mui/icons-material/Logout"; // Import an icon from Material-UI
+import { Typography, Tooltip } from "@mui/material";
 
 const LogoutButton: React.FC = () => {
   const handleLogout = () => {
@@ -11,9 +10,12 @@ const LogoutButton: React.FC = () => {
 
   return (
     <Tooltip title="Logout">
-      <IconButton onClick={handleLogout} color="primary">
-        <LogoutIcon />
-      </IconButton>
+      <Typography
+        onClick={handleLogout}
+        sx={{ cursor: "pointer", color: "black" }}
+      >
+        Logout
+      </Typography>
     </Tooltip>
   );
 };

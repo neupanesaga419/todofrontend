@@ -7,7 +7,10 @@ import {
   Menu,
   MenuItem,
   IconButton,
+  Divider,
+  ListItemIcon,
 } from "@mui/material";
+import { AccountCircle, ExitToApp } from "@mui/icons-material";
 
 interface ProfileProps {
   name: string;
@@ -54,7 +57,14 @@ const Profile: React.FC<ProfileProps> = ({
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        sx={{ mt: "45px" }} // Adjust the dropdown position
+        sx={{
+          mt: "45px",
+          "& .MuiPaper-root": {
+            borderRadius: "10px",
+            boxShadow: "0px 5px 15px rgba(0,0,0,0.1)",
+            minWidth: "200px",
+          },
+        }}
       >
         <MenuItem
           onClick={() => {
@@ -62,9 +72,18 @@ const Profile: React.FC<ProfileProps> = ({
             handleClose();
           }}
         >
+          <ListItemIcon>
+            <AccountCircle fontSize="small" />
+          </ListItemIcon>
           View Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>{LogoutButton}</MenuItem>
+        <Divider />
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <ExitToApp fontSize="small" />
+          </ListItemIcon>
+          {LogoutButton}
+        </MenuItem>
       </Menu>
     </Box>
   );

@@ -1,8 +1,10 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import backgroundImage from "../../assets/todo-background-login.jpg"; // Ensure this is the correct path
 
 export const LoginBackground: React.FC = () => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <Box
       sx={{
@@ -16,7 +18,7 @@ export const LoginBackground: React.FC = () => {
         backgroundPosition: "center", // Centers the background image
         backgroundRepeat: "no-repeat", // Prevents the image from repeating
         zIndex: -1,
-        opacity: 0.8, // Adjust the opacity for a glassmorphism effect
+        opacity: isMobile ? 0.9 : 0.8, // Adjust the opacity for a glassmorphism effect
       }}
     />
   );
