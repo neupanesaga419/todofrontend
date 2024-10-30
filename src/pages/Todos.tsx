@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
-  Card,
-  CardContent,
   Typography,
   Modal,
   CircularProgress,
@@ -11,20 +9,15 @@ import {
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
+
 import axios from "axios";
 import { BASE_URL, CREATE_TODO } from "../utils/constant";
 import CreateTodo from "../components/todos/CreateTodo";
 import DeleteTodoModal from "../components/todos/DeleteTodoModal";
 import { Navbar } from "../components/Navbar";
-
-interface Todo {
-  id: string;
-  title: string;
-  status: string;
-  description: string;
-  completed: boolean;
-}
+import { useTodos } from "../hooks/useTodos";
+import { Todo } from "../types/todo";
+import TodoCard from "../components/todos/TodoCard";
 
 const modalStyle = {
   position: "absolute",
@@ -47,27 +40,11 @@ interface GroupedTodos {
 }
 
 const TodoList: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { todos, loading, fetchTodos } = useTodos();
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
   const [todoToEdit, setTodoToEdit] = useState<Todo | null>(null);
-
-  const fetchTodos = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-    setLoading(true);
-    try {
-      const response = await axios.get(`${BASE_URL}${CREATE_TODO}`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
-      setTodos(response.data);
-    } catch (error) {
-      console.error("Failed to fetch todos:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleOpenDelete = (todo: Todo) => {
     setTodoToDelete(todo);
@@ -117,10 +94,6 @@ const TodoList: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-
   const groupedTodos: GroupedTodos = {
     "Not Started": todos.filter((todo) => todo.status === "Not Started"),
     "Working on It": todos.filter((todo) => todo.status === "Working on It"),
@@ -162,16 +135,18 @@ const TodoList: React.FC = () => {
             onClick={() => handleTodoAction(null)}
             sx={{
               position: "fixed",
-              bottom: 16,
-              right: 16,
+              bottom: 80,
+              right: 50,
               zIndex: 1000,
               minWidth: 120,
               borderRadius: 1,
               textTransform: "none",
               padding: "8px 16px",
               backgroundColor: "#1976d2",
+              boxShadow: "3px 4px 18px 7px rgba(0, 0, 0, 0.7)",
               "&:hover": {
                 backgroundColor: "#115293",
+                boxShadow: "0px 6px 25px rgba(0, 0, 0, 0.35)",
               },
             }}
           >
@@ -204,6 +179,9 @@ const TodoList: React.FC = () => {
                     variant="h6"
                     sx={{
                       textAlign: "center",
+                      fontWeight: 600,
+                      fontFamily: "Poppins",
+                      padding: "10px",
                       mb: 1,
                       position: "sticky",
                       top: 0,
@@ -224,50 +202,12 @@ const TodoList: React.FC = () => {
                     </Typography>
                   ) : (
                     groupedTodos[status as keyof GroupedTodos].map((todo) => (
-                      <Card
-                        key={todo.id}
-                        sx={{ m: 2, boxShadow: "1px 2px 2px 2px grey" }}
-                      >
-                        <CardContent>
-                          <Typography variant="h6">{todo.title}</Typography>
-                          <Typography color="text.secondary" sx={{ mb: 1.5 }}>
-                            {todo.status}
-                          </Typography>
-                          <Typography variant="body2">
-                            {todo.description}
-                          </Typography>
-                          <Typography
-                            variant="caption"
-                            color="text.secondary"
-                            display="block"
-                          >
-                            {todo.completed ? "Completed" : "Incomplete"}
-                          </Typography>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              mt: 2,
-                            }}
-                          >
-                            <Button
-                              variant="outlined"
-                              color="primary"
-                              startIcon={<EditIcon />}
-                              onClick={() => handleOpenEdit(todo)}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              variant="outlined"
-                              color="error"
-                              onClick={() => handleOpenDelete(todo)}
-                            >
-                              Delete
-                            </Button>
-                          </Box>
-                        </CardContent>
-                      </Card>
+                      <TodoCard
+                        key={todo?.id}
+                        todo={todo}
+                        onEdit={handleOpenEdit}
+                        onDelete={handleOpenDelete}
+                      />
                     ))
                   )}
                 </Box>
