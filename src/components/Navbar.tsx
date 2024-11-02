@@ -18,7 +18,12 @@ import userImage from "../assets/hero-img.png";
 import Profile from "./Profile";
 
 interface User {
-  data: { username: string; email: string };
+  data: {
+    username: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+  };
 }
 
 export const Navbar = () => {
@@ -43,7 +48,7 @@ export const Navbar = () => {
     console.log("View Profile clicked");
   };
 
-  const userName = user?.data?.username;
+  const userName = `${user?.data?.first_name} ${user?.data?.last_name}`;
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);

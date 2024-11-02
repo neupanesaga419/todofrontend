@@ -16,10 +16,12 @@ export const login = async (email:string,password:string):Promise<LoginResponse>
 
     try{
         const response = await axios.post<LoginResponse>(`${BASE_URL}${GET_TOKEN}`,{
-            username:email,password:password
+            email:email,password:password
         });
+
         localStorage.setItem("accessToken",response.data.access)
         localStorage.setItem("refreshToken",response.data.refresh)
+        
 
         return response.data;
     }

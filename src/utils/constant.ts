@@ -1,6 +1,12 @@
+// import dotenv from 'dotenv';
+// dotenv.config();
+
+// const IP_ADDRESS = process.env.IP_ADDRESS;
+
+const IP_ADDRESS = import.meta.env.VITE_IP_ADDRESS;
 
 // export const BASE_URL = "http://0.0.0.0:8000"
-export const BASE_URL = "http://192.168.1.68:8000"
+export const BASE_URL = `http://${IP_ADDRESS}:8000`
 
 export const GET_TOKEN = "/auth/token/"
 
