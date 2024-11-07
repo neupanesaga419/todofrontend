@@ -22,7 +22,10 @@
 
 
 .scrollable {
-  overflow-y: auto; /* Enable scrolling */
+  overflow-y: auto;
+  /* Firefox scrollbar properties */
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
 }
 
 /* For Webkit browsers (Chrome, Safari) */
@@ -44,10 +47,4 @@
 /* Handle on hover */
 .scrollable::-webkit-scrollbar-thumb:hover {
   background: #555; /* Darker color on hover */
-}
-
-/* For Firefox */
-.scrollable {
-  scrollbar-width: thin; /* Make scrollbar thin */
-  scrollbar-color: #888 #f1f1f1; /* Handle and track color */
 }

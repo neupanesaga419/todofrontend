@@ -5,10 +5,8 @@ import { useState } from "react";
 import {
   TextField,
   Button,
-  Container,
   Box,
   Typography,
-  Paper,
   IconButton,
   InputAdornment,
   Alert,
@@ -19,8 +17,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginBackground } from "../components/login/LoginBackground";
 import { createAccount } from "../utils/createAccount";
-import { toast } from "react-toastify";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 // Validation schema
 const registerSchema = z
@@ -324,21 +321,26 @@ const Register = () => {
               textAlign: "center",
               mt: { xs: 1.5, sm: 2 },
               mb: { xs: 2, sm: 0 },
+              display: "flex",
+              justifyContent: "space-around",
             }}
           >
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ fontSize: { xs: "0.875rem", sm: "1rem" } }}
-            >
-              Already have an account?{" "}
+            <Box>
               <Link
                 to="/"
                 style={{ color: "inherit", textDecoration: "underline" }}
               >
                 Sign in
               </Link>
-            </Typography>
+            </Box>
+            <Box>
+              <Link
+                to="/reset-email"
+                style={{ color: "inherit", textDecoration: "underline" }}
+              >
+                Reset Email
+              </Link>
+            </Box>
           </Box>
         </Box>
       </Box>

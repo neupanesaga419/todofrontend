@@ -243,14 +243,13 @@ const VerifyOtp: React.FC = () => {
                     value={digit}
                     onChange={(e) => handleChange(e.target, index)}
                     onKeyDown={(e) => handleKeyDown(e, index)}
-                    InputProps={{
-                      inputProps: {
-                        maxLength: 1,
+                    slotProps={{
+                      input: {
                         inputMode: "numeric",
-                        pattern: "[0-9]*",
+
+                        autoComplete: "off",
                       },
                     }}
-                    autoComplete="off"
                   />
                 ))}
               </Box>

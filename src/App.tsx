@@ -26,6 +26,7 @@ import "./App.css";
 import TodoList from "./pages/Todos";
 import Register from "./pages/Register";
 import VerifyOtp from "./pages/VerifyOtp";
+import ResetEmail from "./pages/ResetEmail";
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -157,6 +158,10 @@ const App: React.FC = () => {
         <Route
           path="/verify-otp"
           element={loggedIn ? <Navigate to="/home" replace /> : <VerifyOtp />}
+        />
+        <Route
+          path="/reset-email"
+          element={loggedIn ? <Navigate to="/home" replace /> : <ResetEmail />}
         />
       </Routes>
 
