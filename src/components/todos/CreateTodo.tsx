@@ -93,8 +93,8 @@ const CreateTodo: React.FC<CreateTodoProps> = ({
         p: 3,
         position: "relative",
         mt: 2,
-        width: isMobile ? "90%" : "50%",
-        margin: isMobile ? "auto" : "initial",
+        width: isMobile ? "90%" : "80%",
+        margin: isMobile ? "auto" : "2rem 0",
       }}
     >
       <IconButton

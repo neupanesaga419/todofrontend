@@ -15,3 +15,10 @@ export const REFRESH_TOKEN = "/auth/token/refresh/"
 export const GET_USER = "/auth/users/"
 
 export const CREATE_TODO = "/api/todos/"
+
+
+export const CREATE_ACCOUNT = "/auth/register/"
+
+export const VERIFY_OTP = "/auth/register/verify_otp/"
+
+export const RESEND_OTP = "/auth/register/resend_otp/"

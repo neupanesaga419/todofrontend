@@ -51,7 +51,17 @@ export const LoginPage: React.FC<LoginPageProps> = ({ setLoggedIn }) => {
     >
       <LoginBackground />
       {/* Pass login handler, loading, and error states to LoginForm */}
-      <LoginForm onSubmit={handleLogin} loading={loading} error={loginError} />
+      <LoginForm
+        onSubmit={handleLogin}
+        loading={loading}
+        error={loginError}
+        onForgotPassword={() => {
+          navigate("/forgot-password");
+        }}
+        onSignUp={() => {
+          navigate("/register");
+        }}
+      />
     </Box>
   );
 };

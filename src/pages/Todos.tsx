@@ -22,15 +22,15 @@ import { Todo } from "../types/todo";
 import TodoCard from "../components/todos/TodoCard";
 
 const modalStyle = (isMobile: boolean) => ({
-  position: "absolute",
+  position: isMobile ? "absolute" : "fixed",
   top: "50%",
   left: isMobile ? "49%" : "50%",
   transform: "translate(-50%, -50%)",
-  width: isMobile ? "90%" : 400,
+  width: isMobile ? "90%" : "100%",
   maxHeight: "90vh",
-  overflowY: "auto",
+  overflowY: isMobile ? "auto" : "hidden",
 
-  p: 2,
+  p: isMobile ? 2 : 0,
 });
 
 interface GroupedTodos {
@@ -229,7 +229,7 @@ const TodoList: React.FC = () => {
         <Modal open={openCreateModal} onClose={handleCloseCreateModal}>
           <Box
             sx={modalStyle(isMobile)}
-            maxWidth={isMobile ? "90%" : "500px"}
+            maxWidth={isMobile ? "90%" : "40%"}
             margin={isMobile ? "auto" : "initial"}
           >
             <CreateTodo

@@ -24,6 +24,8 @@ import "@fontsource/playfair-display/700.css";
 import "@fontsource/poppins/500.css";
 import "./App.css";
 import TodoList from "./pages/Todos";
+import Register from "./pages/Register";
+import VerifyOtp from "./pages/VerifyOtp";
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -147,6 +149,14 @@ const App: React.FC = () => {
         <Route
           path="/todos"
           element={loggedIn ? <TodoList /> : <Navigate to="/" replace />}
+        />
+        <Route
+          path="/register"
+          element={loggedIn ? <Navigate to="/home" replace /> : <Register />}
+        />
+        <Route
+          path="/verify-otp"
+          element={loggedIn ? <Navigate to="/home" replace /> : <VerifyOtp />}
         />
       </Routes>
 

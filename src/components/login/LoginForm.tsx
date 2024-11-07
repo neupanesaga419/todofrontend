@@ -23,12 +23,16 @@ interface LoginFormProps {
   onSubmit: (data: LoginFormInputs) => void; // Function to handle form submission
   loading: boolean; // Loading state to show/hide spinner
   error: string | null; // Error state to display login errors
+  onForgotPassword: () => void; // Add this prop
+  onSignUp: () => void; // Add this prop
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({
   onSubmit,
   loading,
   error,
+  onForgotPassword,
+  onSignUp,
 }) => {
   const {
     register,
@@ -154,6 +158,45 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           )}
         </Box>
       </form>
+
+      {/* Add this after the form */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+          mt: 2,
+        }}
+      >
+        <Typography
+          variant="body2"
+          onClick={onForgotPassword}
+          sx={{
+            color: "#39a38c",
+            cursor: "pointer",
+            "&:hover": {
+              textDecoration: "underline",
+            },
+          }}
+        >
+          Forgot Password?
+        </Typography>
+
+        <Typography
+          variant="body2"
+          onClick={onSignUp}
+          sx={{
+            color: "#39a38c",
+            cursor: "pointer",
+            "&:hover": {
+              textDecoration: "underline",
+            },
+          }}
+        >
+          Sign Up
+        </Typography>
+      </Box>
 
       {/* Error message display */}
       {error && (
