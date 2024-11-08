@@ -13,7 +13,7 @@ import { ToastContainer } from "react-toastify";
 import { useTheme } from "@mui/material/styles";
 
 import { resendOtp } from "../utils/createAccount";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ResetEmail: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -142,6 +142,12 @@ const ResetEmail: React.FC = () => {
             >
               {loading ? <CircularProgress size={24} /> : "Send OTP"}
             </Button>
+
+            <Box sx={{ mt: 2 }}>
+              <Link to="/">
+                <Button variant="text">Back to Login</Button>
+              </Link>
+            </Box>
           </>
         </Paper>
       </Box>

@@ -52,10 +52,7 @@ const VerifyOtp: React.FC = () => {
   const [isVerified, setIsVerified] = useState(false);
 
   useEffect(() => {
-    // Show success message if it exists in location state
-    console.log(location.state, "From Location State");
     if (location.state?.message) {
-      console.log(location.state, "From Location State if cases");
       toast.success(location.state.message);
     }
   }, []);

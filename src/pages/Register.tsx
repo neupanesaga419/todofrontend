@@ -330,7 +330,7 @@ const Register = () => {
                 to="/"
                 style={{ color: "inherit", textDecoration: "underline" }}
               >
-                Sign in
+                <Button variant="text">Sign in</Button>
               </Link>
             </Box>
             <Box>
@@ -338,7 +338,7 @@ const Register = () => {
                 to="/reset-email"
                 style={{ color: "inherit", textDecoration: "underline" }}
               >
-                Reset Email
+                <Button variant="text">Reset Email</Button>
               </Link>
             </Box>
           </Box>

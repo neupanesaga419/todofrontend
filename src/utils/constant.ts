@@ -22,3 +22,7 @@ export const CREATE_ACCOUNT = "/auth/register/"
 export const VERIFY_OTP = "/auth/register/verify_otp/"
 
 export const RESEND_OTP = "/auth/register/resend_otp/"
+
+export const SEND_RESET_PASSWORD_OTP = "/auth/register/forgot_password/"
+
+export const VERIFY_RESET_PASSWORD_OTP = "/auth/register/reset_password/"

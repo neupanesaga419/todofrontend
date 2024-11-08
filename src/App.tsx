@@ -27,6 +27,7 @@ import TodoList from "./pages/Todos";
 import Register from "./pages/Register";
 import VerifyOtp from "./pages/VerifyOtp";
 import ResetEmail from "./pages/ResetEmail";
+import { ResetPassword } from "./pages/ResetPassword";
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -162,6 +163,12 @@ const App: React.FC = () => {
         <Route
           path="/reset-email"
           element={loggedIn ? <Navigate to="/home" replace /> : <ResetEmail />}
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            loggedIn ? <Navigate to="/home" replace /> : <ResetPassword />
+          }
         />
       </Routes>
 
