@@ -11,8 +11,8 @@ import {
   isRefreshTokenExpired,
 } from "./utils/apiUtils";
 import { refreshAccessToken } from "./utils/auth";
-import { LoginPage } from "./pages/LoginPage";
-import { Home } from "./pages/Home";
+import { LoginPage } from "./pages/Authentication/LoginPage";
+import { Home } from "./pages/Home/Home";
 import CircularProgress from "@mui/material/CircularProgress";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -23,11 +23,11 @@ import Typography from "@mui/material/Typography";
 import "@fontsource/playfair-display/700.css";
 import "@fontsource/poppins/500.css";
 import "./App.css";
-import TodoList from "./pages/Todos";
-import Register from "./pages/Register";
-import VerifyOtp from "./pages/VerifyOtp";
-import ResetEmail from "./pages/ResetEmail";
-import { ResetPassword } from "./pages/ResetPassword";
+import TodoList from "./pages/Todo/Todos";
+import Register from "./pages/Authentication/Register";
+import VerifyOtp from "./pages/Authentication/VerifyOtp";
+import ResetEmail from "./pages/Authentication/ResetEmail";
+import { ResetPassword } from "./pages/Authentication/ResetPassword";
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);

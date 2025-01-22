@@ -17,13 +17,12 @@ import { Email, Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { ToastContainer, toast } from "react-toastify";
 
-
-import { LoginBackground } from "../components/login/LoginBackground";
+import { LoginBackground } from "../../components/login/LoginBackground";
 import {
   BASE_URL,
   SEND_RESET_PASSWORD_OTP,
   VERIFY_RESET_PASSWORD_OTP,
-} from "../utils/constant";
+} from "../../utils/constant";
 import axios from "axios";
 
 const emailSchema = z.object({

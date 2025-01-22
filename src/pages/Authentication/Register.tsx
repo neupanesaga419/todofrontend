@@ -15,8 +15,8 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginBackground } from "../components/login/LoginBackground";
-import { createAccount } from "../utils/createAccount";
+import { LoginBackground } from "../../components/login/LoginBackground";
+import { createAccount } from "../../utils/createAccount";
 import { toast, ToastContainer } from "react-toastify";
 
 // Validation schema

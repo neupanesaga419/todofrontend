@@ -13,13 +13,13 @@ import "react-toastify/dist/ReactToastify.css";
 import AddIcon from "@mui/icons-material/Add";
 
 import axios from "axios";
-import { BASE_URL, CREATE_TODO } from "../utils/constant";
-import CreateTodo from "../components/todos/CreateTodo";
-import DeleteTodoModal from "../components/todos/DeleteTodoModal";
-import { Navbar } from "../components/Navbar";
-import { useTodos } from "../hooks/useTodos";
-import { Todo } from "../types/todo";
-import TodoCard from "../components/todos/TodoCard";
+import { BASE_URL, CREATE_TODO } from "../../utils/constant";
+import CreateTodo from "../../components/todos/CreateTodo";
+import DeleteTodoModal from "../../components/todos/DeleteTodoModal";
+import { Navbar } from "../../components/Navbar";
+import { useTodos } from "../../hooks/useTodos";
+import { Todo } from "../../types/todo";
+import TodoCard from "../../components/todos/TodoCard";
 
 const modalStyle = (isMobile: boolean) => ({
   position: isMobile ? "absolute" : "fixed",

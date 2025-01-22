@@ -13,7 +13,7 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import { useTheme } from "@mui/material/styles";
 import { useLocation, Link } from "react-router-dom";
-import { verifyOtp, resendOtp } from "../utils/createAccount";
+import { verifyOtp, resendOtp } from "../../utils/createAccount";
 
 // Styled components using MUI v5 syntax
 const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -234,7 +234,7 @@ const VerifyOtp: React.FC = () => {
               >
                 {otp.map((digit, index) => (
                   <StyledTextField
-                    key={index}
+                    key={index + 1}
                     inputRef={(ref) => (inputRefs.current[index] = ref)}
                     variant="outlined"
                     value={digit}
