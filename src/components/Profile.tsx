@@ -11,20 +11,14 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import { AccountCircle, ExitToApp } from "@mui/icons-material";
+import LogoutButton from "./login/Logout";
 
 interface ProfileProps {
   name: string;
   imageUrl: string;
-  onViewProfile: () => void;
-  LogoutButton: React.ReactNode;
 }
 
-const Profile: React.FC<ProfileProps> = ({
-  name,
-  imageUrl,
-  onViewProfile,
-  LogoutButton,
-}) => {
+const Profile: React.FC<ProfileProps> = ({ name, imageUrl }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -68,7 +62,6 @@ const Profile: React.FC<ProfileProps> = ({
       >
         <MenuItem
           onClick={() => {
-            onViewProfile();
             handleClose();
           }}
         >
@@ -82,7 +75,7 @@ const Profile: React.FC<ProfileProps> = ({
           <ListItemIcon>
             <ExitToApp fontSize="small" />
           </ListItemIcon>
-          {LogoutButton}
+          <LogoutButton />
         </MenuItem>
       </Menu>
     </Box>

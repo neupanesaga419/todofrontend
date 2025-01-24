@@ -1,9 +1,13 @@
 import { HomeContents } from "../../components/HomeContents";
+import { BasePage } from "./BasePage";
+import { UserProvider } from "./UserContext";
 
 export const Home = () => {
   return (
     <div>
-      <HomeContents />
+      <UserProvider>
+        <BasePage Contents={<HomeContents />} />
+      </UserProvider>
     </div>
   );
 };

@@ -39,10 +39,10 @@ const App: React.FC = () => {
   // Initial check for login status and token expiry
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const isUserLoggedIn = await isLoggedIn();
+      const isUserLoggedIn = isLoggedIn();
       setLoggedIn(isUserLoggedIn);
       if (isUserLoggedIn) {
-        const expiry = await getTokenExpiry();
+        const expiry = getTokenExpiry();
         setExpiryTime(expiry);
       }
       setLoading(false);
@@ -53,11 +53,11 @@ const App: React.FC = () => {
   // Polling interval to update token expiry periodically
   useEffect(() => {
     const tokenRefreshInterval = setInterval(async () => {
-      const isUserLoggedIn = await isLoggedIn();
+      const isUserLoggedIn = isLoggedIn();
       setLoggedIn(isUserLoggedIn);
 
       if (isUserLoggedIn) {
-        const expiry = await getTokenExpiry();
+        const expiry = getTokenExpiry();
         setExpiryTime(expiry);
       } else {
         handleLogout(); // Ensure we handle logout if the user is no longer logged in
